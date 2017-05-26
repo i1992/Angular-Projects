@@ -1,0 +1,45 @@
+<div class="search-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form>
+                    <h2 class="v-center">Find YOur Fav0rite Artist:...</h2>
+                    <div class="input-group">
+                        <input type="text" ng-model="showname" class="form-control input-md" placeholder="Enter Artist's Name....." />
+                        <span class="input-group-btn">
+                     <button
+                        type="button"
+                        class="btn btn-md btn-warning pull-right"
+                        ng-click="searchShow()">Search</button>
+                  </span>
+                    </div>
+                </form>
+                <div ng-if="results" class="results-block">
+                    <div>Search "{{showname | uppercase}}" result:</div>
+                    <div ng-repeat="result in results">
+                        <div class="row">
+                            <div class="show-name col-md-8"> {{ result.name }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img src="http://placehold.it/200x200" ng-src="{{result.images[2].url}}" />
+                            </div>
+                            <div>
+                                <div class="col-md-5">
+                                    <strong ng-if="result.genres.length >0">Genres: </strong>
+                                    <span>{{result.genres.join(' | ')}}</span>
+                                    <br>
+                                    <button ng-click="searchDetails(result.id)">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div ng-if="artist" class="results-block">
+                    <div custom-directive-to-render-details></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

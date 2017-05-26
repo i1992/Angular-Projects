@@ -1,0 +1,84 @@
+<div class="row">
+    <div class="col-sm-6 forms">
+
+        <div class="page-header">            
+            <h4>Add Module</h4>            
+        </div>
+        <form role="form" ng-submit="addRow()">
+            <div class="form-group">
+                <label>Module Name</label>
+                <input type="text" class="form-control" name="ln" ng-model = "ln">
+            </div>
+            <div class="form-group">
+                <label>Module Website</label>
+                <div class="input-group">
+                    <div class="input-group-addon">http://</div>                        
+                    <input type="text" class="form-control" name="fn" ng-model = "fn">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Module</button>
+        </form>        
+
+        <div class="page-header">
+            <h4>Sign-Up</h4>
+        </div>
+        <form role="form" ng-submit="addFrom()">
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" class="form-control" name="fn1" ng-model="fn1">
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" class="form-control" name="ln1" ng-model="ln1">
+            </div>
+            <div class="form-group">
+                <label>Email address</label>
+                <input type="email" class="form-control" name="email" ng-model="email">
+            </div>
+            <div class="form-group">
+                <label>Module</label>
+                <select class="form-control" ng-model="drop1">                    
+                    <option ng-repeat="modules in module" value="{{modules.ln}}">{{modules.ln}}</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign-Up</button>
+        </form>
+        <br><br><br>
+    </div>
+
+
+    <div class="col-sm-6 groups">
+        <div class="page-header">
+            <h4>Modules &amp; Groups</h4>
+        </div>
+
+        <div class="panel panel-primary" ng-repeat="modules in module | orderBy : 'ln'">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a  href="http://+{{modules.fn}}" target="_blank">{{modules.ln}}</a>                    
+                </h4>
+            </div>            
+            <div class="panel-body">                
+                <p class="text-center">No students have signed up for this module.</p>
+                <table class="table table-bordered table-hover table-striped" ng-if = "user">
+                    <tr><th>First</th><th>Last</th><th>E-mail</th><th></th></tr>
+                    <tr ng-repeat="users in user" ng-if="users.drop1 === modules.ln">
+                        <td>{{users.fn1}}</td>
+                        <td>{{users.ln1}}</td>
+                        <td>{{users.email}}</td>
+                        <td class="text-center">
+                            <button type="submit" class="btn btn-warning btn-sm" ng-click ='dell(modules.firstN)'>
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+                <p class="text-right remove-group-link">
+                    <button type="submit" class="btn btn-warning" ng-click ='del($index)'>
+                        <span class="glyphicon glyphicon-trash"></span> Remove Group
+                    </button>
+                </p>
+            </div>
+        </div>        
+    </div>
+</div>
